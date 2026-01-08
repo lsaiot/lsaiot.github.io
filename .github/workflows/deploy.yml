@@ -1,0 +1,44 @@
+name: Hexo Auto Deploy                   # 工作流名称，显示在 GitHub Actions 页面
+
+on:                                      # 触发条件
+  push:                                  # 当发生代码推送时
+    branches:
+      - main                             # 仅监听 main 分支（源码分支）
+
+jobs:                                    # 任务集合
+  build-and-deploy:                      # 任务 ID
+    runs-on: ubuntu-latest               # 运行环境：最新的 Ubuntu 虚拟机，从Github资源池获取
+
+    steps:                               # 具体步骤
+      - name: Checkout Source            # 1. 拉取代码
+        uses: actions/checkout@v3        # 使用官方插件，将你的源码下载到虚拟机
+        with:
+          submodules: true               # 如果你的主题是作为子模块引入的，自动拉取
+
+      - name: Setup Node                 # 2. 准备 Node 环境
+        uses: actions/setup-node@v3      # 安装 Node.js
+        with:
+          node-version: '24.11.0'             # 指定版本，Hexo 通常在 16-20 版本运行稳定
+          cache: 'npm'                   # 缓存依赖，加快下次运行速度
+
+      - name: Install Dependencies & Build # 3. 安装依赖并编译成静态网页
+        run: |                           # 运行多行 Linux 命令
+          npm install                    # 安装 Hexo 框架及其插件
+          npx hexo generate              # 核心：将 Markdown 渲染为 HTML (存入 public/ 目录)
+
+      - name: Deploy to GitHub Pages     # 4. 部署到 GitHub
+        uses: JamesIves/github-pages-deploy-action@v4 
+        with:
+          folder: public                 # 指定要上传的文件夹（刚才编译出的成品）
+          branch: gh-pages               # 目标分支：存放在线网页的分支
+          commit-message: "Rendered by GitHub Actions" # 自动生成的提交信息
+
+      - name: Sync to Alibaba Cloud      # 5. 利用 200M 带宽同步到阿里云
+        uses: easingthemes/ssh-deploy@main # 使用 SSH 协议同步文件
+        env:                               # 传入环境变量（从 GitHub Secrets 读取）
+          SSH_PRIVATE_KEY: ${{ secrets.ALIYUN_SSH_KEY }} # 你的 SSH 私钥
+          ARGS: "-avz --delete"            # rsync 参数：a归档、v详细、z压缩传输、delete删除目标多余文件
+          SOURCE: "public/"                # 源目录
+          REMOTE_HOST: ${{ secrets.ALIYUN_HOST }} # 阿里云 IP
+          REMOTE_USER: ${{ secrets.ALIYUN_USER }} # 服务器用户名，建议 root
+          TARGET: "/var/www/blog"          # 阿里云上的存放路径
