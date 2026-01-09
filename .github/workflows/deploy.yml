@@ -31,7 +31,7 @@ jobs:                                    # 任务集合
         with:
           folder: public                 # 指定要上传的文件夹（刚才编译出的成品）
           branch: gh-pages               # 目标分支：存放在线网页的分支
-          commit-message: "Rendered by GitHub Actions" # 自动生成的提交信息
+          commit-message: "${{ github.event.head_commit.message }}" # 自动生成的提交信息
 
       - name: Sync to Alibaba Cloud      # 5. 利用 200M 带宽同步到阿里云
         uses: easingthemes/ssh-deploy@main # 使用 SSH 协议同步文件
