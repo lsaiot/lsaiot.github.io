@@ -73,8 +73,8 @@
   
     <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2026/01/08/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2026-01-08T14:31:54.935Z" itemprop="datePublished">2026-01-08</time>
+    <a href="/2026/01/09/hello-world/" class="article-date">
+  <time class="dt-published" datetime="2026-01-09T01:03:41.618Z" itemprop="datePublished">2026-01-09</time>
 </a>
     
   </div>
@@ -85,7 +85,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/01/08/hello-world/">Hello World</a>
+      <a class="p-name article-title" href="/2026/01/09/hello-world/">Hello World</a>
     </h1>
   
 
@@ -110,233 +110,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/01/08/hello-world/" data-id="cuid1R2lImRIw69SQRmXrbko5" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-test" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/01/08/test/" class="article-date">
-  <time class="dt-published" datetime="2026-01-08T14:31:54.935Z" itemprop="datePublished">2026-01-08</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="曙光-AI应用优化工程师-模拟面试题-标准回答"><a href="#曙光-AI应用优化工程师-模拟面试题-标准回答" class="headerlink" title="曙光 AI应用优化工程师 模拟面试题 + 标准回答"></a>曙光 AI应用优化工程师 模拟面试题 + 标准回答</h1><hr>
-<h2 id="一、项目理解与整体实现"><a href="#一、项目理解与整体实现" class="headerlink" title="一、项目理解与整体实现"></a>一、项目理解与整体实现</h2><h3 id="Q1-请你介绍一下-RV1126-项目整体思路，你负责哪些部分？"><a href="#Q1-请你介绍一下-RV1126-项目整体思路，你负责哪些部分？" class="headerlink" title="Q1. 请你介绍一下 RV1126 项目整体思路，你负责哪些部分？"></a>Q1. 请你介绍一下 RV1126 项目整体思路，你负责哪些部分？</h3><p><strong>想听到的：</strong></p>
-<ul>
-<li>项目目标：在 RV1126 板端实现实时显著性检测。</li>
-<li>流程：PyTorch → ONNX → RKNN → RV1126。</li>
-<li>技术亮点：双缓冲、Zero-Copy、RGA预处理。</li>
-<li>你的职责：模型转换、推理优化、系统调度。</li>
-</ul>
-<p><strong>优秀回答示例：</strong></p>
-<blockquote>
-<p>项目的目标是在 RV1126 平台上实现实时显著性检测。<br>我负责模型的 ONNX 转换、RKNN 量化部署、推理循环优化和性能测试。<br>通过双缓冲机制与 Zero-Copy 数据传输，最终推理速度达到 32FPS，精度下降控制在 1.5% 以内。</p>
-</blockquote>
-<p><strong>延伸提问：</strong></p>
-<ul>
-<li>为什么选择 YOLOv8 而不是 YOLOv5？<br>→ YOLOv8 算子支持更完整，兼容 RKNN 1.7.5，模型轻量化更好。</li>
-</ul>
-<hr>
-<h2 id="二、模型转换与部署"><a href="#二、模型转换与部署" class="headerlink" title="二、模型转换与部署"></a>二、模型转换与部署</h2><h3 id="Q2-模型从-PyTorch-转到-RKNN-过程中遇到了哪些问题？如何解决？"><a href="#Q2-模型从-PyTorch-转到-RKNN-过程中遇到了哪些问题？如何解决？" class="headerlink" title="Q2. 模型从 PyTorch 转到 RKNN 过程中遇到了哪些问题？如何解决？"></a>Q2. 模型从 PyTorch 转到 RKNN 过程中遇到了哪些问题？如何解决？</h3><p><strong>想听到的：</strong></p>
-<ul>
-<li>ONNX 作为中间格式。</li>
-<li>曙光平台部分算子不兼容。</li>
-<li>量化精度下降问题。</li>
-</ul>
-<p><strong>优秀回答示例：</strong></p>
-<blockquote>
-<p>主要问题是部分算子（如 SiLU、Upsample）在 RKNN 不支持，以及量化后精度下降。<br>我通过修改导出脚本替换不兼容算子，并构建代表性数据集进行量化校准。<br>最后通过对比 ONNX 与 RKNN 的中间层输出验证误差，确保精度一致性。</p>
-</blockquote>
-<p><strong>延伸提问：</strong></p>
-<ul>
-<li>量化校准怎么做的？<br>→ 采样 500 张典型图像，进行 min-max 或 KL 散度校准。</li>
-</ul>
-<hr>
-<h2 id="三、性能分析与优化策略"><a href="#三、性能分析与优化策略" class="headerlink" title="三、性能分析与优化策略"></a>三、性能分析与优化策略</h2><h3 id="Q3-你是如何优化推理性能的？主要瓶颈在哪里？"><a href="#Q3-你是如何优化推理性能的？主要瓶颈在哪里？" class="headerlink" title="Q3. 你是如何优化推理性能的？主要瓶颈在哪里？"></a>Q3. 你是如何优化推理性能的？主要瓶颈在哪里？</h3><p><strong>想听到的：</strong></p>
-<ul>
-<li>硬件协同优化（RGA、NPU）。</li>
-<li>双缓冲机制。</li>
-<li>Zero-Copy 数据传输。</li>
-<li>线程并行。</li>
-</ul>
-<p><strong>优秀回答示例：</strong></p>
-<blockquote>
-<p>优化主要从四方面入手：<br>① 使用 RGA 模块替代 CPU 做预处理；<br>② 采用双缓冲实现采集与推理并行；<br>③ 引入 Zero-Copy 避免冗余内存拷贝；<br>④ 调整线程优先级和绑定核心。<br>综合优化后，推理性能提升约 45%。</p>
-</blockquote>
-<p><strong>延伸提问：</strong></p>
-<ul>
-<li>Zero-Copy 是如何实现的？<br>→ 摄像头帧缓冲和 NPU 输入共享物理内存，通过 DMA 传输，无需 CPU 拷贝。</li>
-</ul>
-<hr>
-<h2 id="四、模型结构与算法理解"><a href="#四、模型结构与算法理解" class="headerlink" title="四、模型结构与算法理解"></a>四、模型结构与算法理解</h2><h3 id="Q4-你为什么要设计多层损失函数？每个部分的作用是什么？"><a href="#Q4-你为什么要设计多层损失函数？每个部分的作用是什么？" class="headerlink" title="Q4. 你为什么要设计多层损失函数？每个部分的作用是什么？"></a>Q4. 你为什么要设计多层损失函数？每个部分的作用是什么？</h3><p><strong>想听到的：</strong></p>
-<ul>
-<li>BCE：像素级。</li>
-<li>IoU：区域级。</li>
-<li>SSIM：结构级。</li>
-<li>SoftAdapt：自适应权重调整。</li>
-</ul>
-<p><strong>优秀回答示例：</strong></p>
-<blockquote>
-<p>显著性检测涉及多层特征的精确对齐。<br>我设计了多层损失：BCE 负责像素级区分，IoU 衡量区域一致性，SSIM 保留边缘结构。<br>SoftAdapt 根据梯度变化自动调整权重，使模型在不同阶段动态平衡学习重点。</p>
-</blockquote>
-<p><strong>延伸提问：</strong></p>
-<ul>
-<li>SoftAdapt 是如何动态调整的？<br>→ 根据每层损失的梯度变化率计算比例系数，自动平衡各任务。</li>
-</ul>
-<hr>
-<h2 id="五、系统资源与内存管理"><a href="#五、系统资源与内存管理" class="headerlink" title="五、系统资源与内存管理"></a>五、系统资源与内存管理</h2><h3 id="Q5-你是如何防止系统长时间运行崩溃的？"><a href="#Q5-你是如何防止系统长时间运行崩溃的？" class="headerlink" title="Q5. 你是如何防止系统长时间运行崩溃的？"></a>Q5. 你是如何防止系统长时间运行崩溃的？</h3><p><strong>想听到的：</strong></p>
-<ul>
-<li>一次性资源分配。</li>
-<li>集中释放。</li>
-<li>监控内存与线程状态。</li>
-</ul>
-<p><strong>优秀回答示例：</strong></p>
-<blockquote>
-<p>我们在初始化阶段统一分配所有缓冲区（两个 g_buffer），整个运行周期复用。<br>程序退出时统一释放所有资源，包括 RKNN context 和 media buffer。<br>另外使用 valgrind 定期检测内存泄漏，确保系统长时间运行稳定。</p>
-</blockquote>
-<p><strong>延伸提问：</strong></p>
-<ul>
-<li>如果出现线程阻塞或死锁怎么办？<br>→ 用互斥锁控制缓冲区交换，必要时加条件变量防止死锁。</li>
-</ul>
-<hr>
-<h2 id="六、项目难点与解决方案"><a href="#六、项目难点与解决方案" class="headerlink" title="六、项目难点与解决方案"></a>六、项目难点与解决方案</h2><h3 id="Q6-你认为这个项目最难的部分是什么？怎么解决的？"><a href="#Q6-你认为这个项目最难的部分是什么？怎么解决的？" class="headerlink" title="Q6. 你认为这个项目最难的部分是什么？怎么解决的？"></a>Q6. 你认为这个项目最难的部分是什么？怎么解决的？</h3><p><strong>想听到的：</strong></p>
-<ul>
-<li>算子兼容性问题。</li>
-<li>系统资源调度。</li>
-<li>稳定性保障。</li>
-</ul>
-<p><strong>优秀回答示例：</strong></p>
-<blockquote>
-<p>最大的难点在于算子兼容与系统稳定性。<br>由于 RKNN 支持的算子有限，我手动替换了不兼容算子，并优化导出脚本。<br>此外，我们设计了统一内存池与双缓冲结构，避免了内存碎片和阻塞问题，系统可以稳定运行数小时。</p>
-</blockquote>
-<p><strong>延伸提问：</strong></p>
-<ul>
-<li>你是如何定位不兼容算子的？<br>→ 通过 ONNX Graph 分析工具查看 Unsupported Ops，结合 RKNN 支持表替换。</li>
-</ul>
-<hr>
-<h2 id="七、AI优化与技术趋势"><a href="#七、AI优化与技术趋势" class="headerlink" title="七、AI优化与技术趋势"></a>七、AI优化与技术趋势</h2><h3 id="Q7-你如何看待边缘AI与大模型结合的趋势？"><a href="#Q7-你如何看待边缘AI与大模型结合的趋势？" class="headerlink" title="Q7. 你如何看待边缘AI与大模型结合的趋势？"></a>Q7. 你如何看待边缘AI与大模型结合的趋势？</h3><p><strong>想听到的：</strong></p>
-<ul>
-<li>云端大模型 + 端侧推理。</li>
-<li>RAG &#x2F; LangChain 的协同应用。</li>
-</ul>
-<p><strong>优秀回答示例：</strong></p>
-<blockquote>
-<p>边缘AI与大模型未来会形成协同架构。<br>端侧负责实时检测和数据过滤，云端大模型负责语义分析和推理。<br>像 RAG、LangChain 就体现了这种组合：边端提供结构化信息，大模型进行语义检索与生成。</p>
-</blockquote>
-<p><strong>延伸提问：</strong></p>
-<ul>
-<li>如果将 RV1126 项目与 LangChain 结合，你会怎么做？<br>→ 将检测结果（类别、位置、置信度）转为结构化数据输入 LLM，实现多模态理解或事件描述。</li>
-</ul>
-<hr>
-<h2 id="八、工程设计与模块化"><a href="#八、工程设计与模块化" class="headerlink" title="八、工程设计与模块化"></a>八、工程设计与模块化</h2><h3 id="Q8-项目是如何模块化组织的？"><a href="#Q8-项目是如何模块化组织的？" class="headerlink" title="Q8. 项目是如何模块化组织的？"></a>Q8. 项目是如何模块化组织的？</h3><p><strong>想听到的：</strong></p>
-<ul>
-<li>模块划分与职责清晰。</li>
-<li>可扩展结构。</li>
-</ul>
-<p><strong>优秀回答示例：</strong></p>
-<blockquote>
-<p>系统划分为四个模块：采集、推理、可视化、资源管理。<br>各模块独立运行，主线程负责调度，日志系统记录状态与异常。<br>这样的架构方便后续扩展与维护。</p>
-</blockquote>
-<p><strong>延伸提问：</strong></p>
-<ul>
-<li>如果要商业化部署，还需要哪些改进？<br>→ 封装SDK、标准化接口、容错机制、UI可配置化。</li>
-</ul>
-<hr>
-<h2 id="九、性能分析与工具"><a href="#九、性能分析与工具" class="headerlink" title="九、性能分析与工具"></a>九、性能分析与工具</h2><h3 id="Q9-你是如何定位性能瓶颈的？"><a href="#Q9-你是如何定位性能瓶颈的？" class="headerlink" title="Q9. 你是如何定位性能瓶颈的？"></a>Q9. 你是如何定位性能瓶颈的？</h3><p><strong>想听到的：</strong></p>
-<ul>
-<li>数据采集方法。</li>
-<li>分阶段分析。</li>
-</ul>
-<p><strong>优秀回答示例：</strong></p>
-<blockquote>
-<p>我通过在推理循环中插入时间戳，统计采集、预处理、推理、后处理阶段的耗时。<br>同时结合 rknn_performance_test、top 工具分析 NPU 占用率，定位瓶颈。<br>发现主要瓶颈在预处理和内存拷贝，于是用 RGA + Zero-Copy 解决。</p>
-</blockquote>
-<p><strong>延伸提问：</strong></p>
-<ul>
-<li>如果优化后仍无法提升性能，你会怎么办？<br>→ 考虑模型轻量化（剪枝、量化）、减少输入分辨率、合并小算子。</li>
-</ul>
-<hr>
-<h2 id="十、开放性问题（考思维深度）"><a href="#十、开放性问题（考思维深度）" class="headerlink" title="十、开放性问题（考思维深度）"></a>十、开放性问题（考思维深度）</h2><h3 id="Q10-如果不允许改模型结构，如何提升推理速度？"><a href="#Q10-如果不允许改模型结构，如何提升推理速度？" class="headerlink" title="Q10. 如果不允许改模型结构，如何提升推理速度？"></a>Q10. 如果不允许改模型结构，如何提升推理速度？</h3><p><strong>想听到的：</strong></p>
-<ul>
-<li>工程级优化方案。</li>
-</ul>
-<p><strong>优秀回答示例：</strong></p>
-<blockquote>
-<p>我会从三个方向优化：  </p>
-<ul>
-<li>算子融合（Conv + BN）；  </li>
-<li>模型量化（FP16 &#x2F; INT8）；  </li>
-<li>图优化（常量折叠、冗余节点剪枝）；  </li>
-<li>并行推理或 pipeline 复用。<br>实际中这些手段往往能带来 20%~40% 的性能提升。</li>
-</ul>
-</blockquote>
-<p><strong>延伸提问：</strong></p>
-<ul>
-<li>如果是多模型并行推理呢？<br>→ 使用多核绑定与线程池分配，避免频繁上下文切换。</li>
-</ul>
-<hr>
-<h2 id="✅-总结要点"><a href="#✅-总结要点" class="headerlink" title="✅ 总结要点"></a>✅ 总结要点</h2><table>
-<thead>
-<tr>
-<th>维度</th>
-<th>面试官关注</th>
-<th>优秀表现特征</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>算法理解</strong></td>
-<td>能解释模型原理、结构改进与损失设计</td>
-<td>逻辑清晰，结合结果数据</td>
-</tr>
-<tr>
-<td><strong>优化能力</strong></td>
-<td>掌握硬件特性、量化与加速手段</td>
-<td>用数据支撑优化效果</td>
-</tr>
-<tr>
-<td><strong>工程实现</strong></td>
-<td>熟悉多线程、内存管理、系统调度</td>
-<td>有具体方法和验证工具</td>
-</tr>
-<tr>
-<td><strong>技术视野</strong></td>
-<td>理解大模型趋势、边缘AI协同</td>
-<td>能延伸到LangChain、RAG等新方向</td>
-</tr>
-<tr>
-<td><strong>表达能力</strong></td>
-<td>能简洁地描述问题与解决过程</td>
-<td>条理清晰、有数字、有因果</td>
-</tr>
-</tbody></table>
-<hr>
-<blockquote>
-<p>🎓 <strong>提示</strong><br>建议在练习时：</p>
-<ul>
-<li>每个问题控制在 2 分钟内回答；  </li>
-<li>回答包含 “做什么 → 怎么做 → 为什么 → 效果”；  </li>
-<li>尽量加上数据或改进比例，让回答更有说服力。</li>
-</ul>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/01/08/test/" data-id="cuid7akQt0LMyLeymvBr_nwok" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2026/01/09/hello-world/" data-id="cuid-k1KkLeCY3JJkM7D34tJo" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -379,11 +153,7 @@
       <ul>
         
           <li>
-            <a href="/2026/01/08/hello-world/">Hello World</a>
-          </li>
-        
-          <li>
-            <a href="/2026/01/08/test/">(no title)</a>
+            <a href="/2026/01/09/hello-world/">Hello World</a>
           </li>
         
       </ul>
